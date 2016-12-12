@@ -35,3 +35,7 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Compiled front-end assets
+client/public/turtlesim-demo.min.js
+client/public/turtlesim-demo.min.js.map
