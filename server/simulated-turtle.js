@@ -137,7 +137,7 @@ class SimulatedTurtle extends EventEmitter {
       let derivative = (errorVal - previousError) / this.publishInterval;
       let newVelocity = kp * errorVal + ki * integral + kd * derivative;
       let angVelocity = this.thetaForGoalPosition(goalX, goalY) - this.theta;
-      if (Math.abs(angVelocity) > Math.PI) { // we've gone too far.
+      if (Math.abs(angVelocity) > Math.PI / 2) { // we've gone too far.
         angVelocity = 0.0;
         newVelocity = -newVelocity;
       }
