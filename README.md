@@ -21,7 +21,7 @@ Then, to build and run this demo:
 
     git clone https://github.com/esonderegger/turtlesim-demo.git
     cd turtlesim-demo
-    npm installe
+    npm install
     npm run dev
 
 Finally, open up a web browser and go to [http://localhost:3000](http://localhost:3000) to see the simulated turtle in a Leaflet interactive map. Click the buttons to command the turtle to draw a star or upload one of the SVG files in this repository to have the turtle draw its path.
