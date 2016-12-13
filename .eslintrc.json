@@ -1,0 +1,19 @@
+{
+    "extends": "google",
+    "installedESLint": true,
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+        }
+    },
+    "rules": {
+        "semi": "error",
+        "new-cap": 0
+    },
+    "plugins": [
+    ],
+    "env": {
+        "browser": true
+    }
+}

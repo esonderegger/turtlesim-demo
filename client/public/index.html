@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Turtlesim Shape Demo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <style>
+    body {
+      font-family: sans-serif;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+#turtlemap {
+  height: 540px;
+  margin: 20px 0;
+  max-width: 540px;
+}
+    </style>
+  </head>
+  <body>
+    <h1>Turtlesim Shape Demo</h1>
+    <p>A simple little demo to show a simulated turtle drawing shapes.</p>
+    <button class="actionbutton" id="starbutton">Draw a star...</button>
+    <p>Choose an SVG file to see it in action.</p>
+    <div>
+      <input type="file" id="fileinput" class="inputfile" />
+      <label for="file">Choose a file</label>
+    </div>
+    <div id="turtlemap"></div>
+    <script src="turtlesim-demo.min.js"></script>
+  </body>
+</html>
