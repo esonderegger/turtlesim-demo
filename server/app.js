@@ -9,17 +9,6 @@ let turtle1 = null;
 
 rosnodejs.initNode('/my_node', {onTheFly: true}).then((rosNode) => {
   turtle1 = new SimulatedTurtle(rosNode, 0, 0, 0);
-  // rosNode.subscribe(
-  //   '/turtle1/pose',
-  //   'turtlesim/Pose',
-  //   (data) => {
-  //     io.emit('turtle1', data);
-  //   },
-  //   {
-  //     queueSize: 1,
-  //     throttleMs: 10,
-  //   }
-  // );
   turtle1.on('pose', (msg) => {
     io.emit('turtle1', msg);
   });
