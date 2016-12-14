@@ -148,12 +148,14 @@ twoTurtlesButton.addEventListener('click', () => {
  */
 function handleFileInputChange(evt) {
   const fileList = evt.target.files;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const pathsFromSvg = svgTools.pathsFromSvg(reader.result);
-    socket.emit('draw paths', pathsFromSvg);
-  };
-  reader.readAsText(fileList[0]);
+  if (fileList.length === 1) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const pathsFromSvg = svgTools.pathsFromSvg(reader.result);
+      socket.emit('draw paths', pathsFromSvg);
+    };
+    reader.readAsText(fileList[0]);
+  }
 }
 
 const inputElement = document.getElementById('fileinput');
