@@ -96,7 +96,7 @@ class SimulatedTurtle extends EventEmitter {
    * @param {number} integral - The integral value from the previous step.
    */
   goToTheta(goalTheta, callback, previousError, integral) {
-    let errorVal = goalTheta - this.theta;
+    let errorVal = this.thetaError(goalTheta, this.theta);
     if (Math.abs(errorVal) < this.thetaTolerance) {
       this.setVelocity(0.0, 0.0);
       callback();
@@ -134,6 +134,28 @@ class SimulatedTurtle extends EventEmitter {
   }
 
   /**
+   * Since artangent values range from -pi to pi, sometimes the difference
+   * between the desired theta and the current theta is greater than pi.
+   * In those cases, we should rotate in the opposite direction.
+   * @param {number} desired - The desired theta value.
+   * @param {number} current - The current theta value.
+   * @return {number}
+   */
+  thetaError(desired, current) {
+    let errorAmount = desired - current;
+    if (Math.abs(errorAmount) < Math.PI) {
+      return errorAmount;
+    }
+    while (errorAmount > Math.PI) {
+      errorAmount -= (Math.PI * 2);
+    }
+    while (errorAmount < -Math.PI) {
+      errorAmount += (Math.PI * 2);
+    }
+    return errorAmount;
+  }
+
+  /**
    * Directs the turtle to the desired XY coordinates using PID control.
    * @param {number} goalX - The desired x coordinate.
    * @param {number} goalY - The desired y coordinate.
@@ -148,7 +170,9 @@ class SimulatedTurtle extends EventEmitter {
       this.setVelocity(0.0, 0.0);
       callback();
     } else {
-      let angVelocity = this.thetaForGoalPosition(goalX, goalY) - this.theta;
+      let angVelocity = this.thetaError(
+        this.thetaForGoalPosition(goalX, goalY), this.theta
+      );
       if (Math.abs(angVelocity) > Math.PI / 2) { // we've gone too far.
         angVelocity = 0.0;
         errorVal = -errorVal;
