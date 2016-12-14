@@ -14,7 +14,6 @@ class SimulatedTurtle extends EventEmitter {
    */
   constructor(rosNode, x, y, theta, name) {
     super();
-    let turtleInstance = this;
     this.rosNode = rosNode;
     this.xPosition = x;
     this.yPosition = y;
@@ -47,17 +46,17 @@ class SimulatedTurtle extends EventEmitter {
       '/' + name + '/pose',
       'turtlesim/Pose',
       (data) => {
-        turtleInstance.setCurrentPose(data);
+        this.setCurrentPose(data);
       },
-      {queueSize: 1, throttleMs: turtleInstance.publishInterval}
+      {queueSize: 1, throttleMs: this.publishInterval}
     );
-    turtleInstance.publisher = rosNode.advertise(
+    this.publisher = rosNode.advertise(
       '/' + name + '/cmd_vel',
       'geometry_msgs/Twist',
       {
         queueSize: 1,
         latching: true,
-        throttleMs: turtleInstance.publishInterval,
+        throttleMs: this.publishInterval,
       }
     );
   }
