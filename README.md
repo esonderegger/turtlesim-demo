@@ -25,3 +25,11 @@ Then, to build and run this demo:
     npm run dev
 
 Finally, open up a web browser and go to [http://localhost:3000](http://localhost:3000) to see the simulated turtle in a Leaflet interactive map. Click the buttons to command the turtle to draw a star or upload one of the SVG files in this repository to have the turtle draw its path.
+
+## Limitations
+
+This turtlesim controller can only move in straight lines.
+
+As a result of this limitation, SVG files with path elements containing Bezier curves and arcs are not supported and will produce incorrect paths.
+
+Translation transformations of path elements are supported but all other transformations are not.
