@@ -5,37 +5,59 @@ const rosnodejs = require('rosnodejs');
 /** Class representing a turtlesim turtle. */
 class SimulatedTurtle extends EventEmitter {
   /**
-   * Create a point.
+   * Create a new turtle.
    * @param {rosNode} rosNode - ROS Node from rosnodejs.
    * @param {number} x - Initial x coordinate for the new turtle.
    * @param {number} y - Initial y coordinate for the new turtle.
    * @param {number} theta - Initial theta value for the new turtle.
+   * @param {string} name - The name for the turtle. Must be unique.
    */
-  constructor(rosNode, x, y, theta) {
+  constructor(rosNode, x, y, theta, name) {
     super();
+    let turtleInstance = this;
+    this.rosNode = rosNode;
     this.xPosition = x;
     this.yPosition = y;
     this.theta = theta;
+    this.name = name;
     this.angularVelocity = 0.0;
     this.linearVelocity = 0.0;
     this.publishInterval = 10;
     this.thetaTolerance = 0.00005;
     this.distanceTolerance = 0.005;
+    const spawnMessage = rosnodejs.require('turtlesim').srv.Spawn;
+    const spawnRequest = new spawnMessage.Request({
+      x: x,
+      y: y,
+      theta: theta,
+      name: name,
+    });
+    let spawnClient = rosNode.serviceClient('/spawn', 'turtlesim/Spawn');
+    rosNode.waitForService(spawnClient.getService(), 2000)
+      .then((available) => {
+        if (available) {
+          spawnClient.call(spawnRequest, (resp) => {
+            console.log('spawned ' + name);
+          });
+        } else {
+          console.log('Service not available');
+        }
+      });
     rosNode.subscribe(
-      '/turtle1/pose',
+      '/' + name + '/pose',
       'turtlesim/Pose',
       (data) => {
-        this.setCurrentPose(data);
+        turtleInstance.setCurrentPose(data);
       },
-      {queueSize: 1, throttleMs: 0}
+      {queueSize: 1, throttleMs: turtleInstance.publishInterval}
     );
-    this.publisher = rosNode.advertise(
-      '/turtle1/cmd_vel',
+    turtleInstance.publisher = rosNode.advertise(
+      '/' + name + '/cmd_vel',
       'geometry_msgs/Twist',
       {
         queueSize: 1,
         latching: true,
-        throttleMs: this.publishInterval,
+        throttleMs: turtleInstance.publishInterval,
       }
     );
   }
@@ -181,6 +203,98 @@ class SimulatedTurtle extends EventEmitter {
         }
       );
     }
+  }
+
+  /**
+   * Sets the turtle's pen color (r g b), width, and turns pen on or off.
+   * @param {number} r - The red channel of the pen color.
+   * @param {number} g - The green channel of the pen color.
+   * @param {number} b - The blue channel of the pen color.
+   * @param {number} width - The width of the pen.
+   * @param {number} off - Whether the pen is on or off.
+   * @param {requestCallback} callback - What to do after completion.
+   */
+  setPen(r, g, b, width, off, callback) {
+    const penMessage = rosnodejs.require('turtlesim').srv.SetPen;
+    const penRequest = new penMessage.Request({
+      r: r,
+      g: g,
+      b: b,
+      width: width,
+      off: off,
+    });
+    let penClient = this.rosNode.serviceClient(
+      '/' + this.name + '/set_pen',
+      'turtlesim/SetPen'
+    );
+    this.rosNode.waitForService(penClient.getService(), 2000)
+      .then((available) => {
+        if (available) {
+          penClient.call(penRequest, (resp) => {
+            callback();
+          });
+        } else {
+          console.log('Service not available');
+        }
+      });
+  }
+
+  /**
+   * Teleports the turtle to (x, y, theta).
+   * @param {number} x - The new x coordinate.
+   * @param {number} y - The new y coordinate.
+   * @param {number} theta - The new heading.
+   * @param {requestCallback} callback - What to do after completion.
+   */
+  teleportAbsolute(x, y, theta, callback) {
+    const teleMessage = rosnodejs.require('turtlesim').srv.TeleportAbsolute;
+    const teleRequest = new teleMessage.Request({
+      x: x,
+      y: y,
+      theta: theta,
+    });
+    let teleClient = this.rosNode.serviceClient(
+      '/' + this.name + '/teleport_absolute',
+      'turtlesim/TeleportAbsolute'
+    );
+    this.rosNode.waitForService(teleClient.getService(), 2000)
+      .then((available) => {
+        if (available) {
+          teleClient.call(teleRequest, (resp) => {
+            callback();
+          });
+        } else {
+          console.log('Service not available');
+        }
+      });
+  }
+
+  /**
+   * Teleports the turtle from the turtle's current position.
+   * @param {number} linear - The new x coordinate.
+   * @param {number} angular - The new y coordinate.
+   * @param {requestCallback} callback - What to do after completion.
+   */
+  teleportRelative(linear, angular, callback) {
+    const teleMessage = rosnodejs.require('turtlesim').srv.TeleportRelative;
+    const teleRequest = new teleMessage.Request({
+      linear: linear,
+      angular: angular,
+    });
+    let teleClient = this.rosNode.serviceClient(
+      '/' + this.name + '/teleport_relative',
+      'turtlesim/TeleportRelative'
+    );
+    this.rosNode.waitForService(teleClient.getService(), 2000)
+      .then((available) => {
+        if (available) {
+          teleClient.call(teleRequest, (resp) => {
+            callback();
+          });
+        } else {
+          console.log('Service not available');
+        }
+      });
   }
 }
 
