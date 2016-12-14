@@ -103,8 +103,26 @@ setInterval(() => {
   checkTurtlesForRecency();
 }, 100);
 
-const starbutton = document.getElementById('starbutton');
-starbutton.addEventListener('click', () => {
+const oneTurtleButton = document.getElementById('draw-star-1-turtle');
+oneTurtleButton.addEventListener('click', () => {
+  const starpaths = [[
+    [4, 0],
+    [3, 3],
+    [0, 3],
+    [2.5, 5],
+    [1.5, 8],
+    [4, 6],
+    [6.5, 8],
+    [5.5, 5],
+    [8, 3],
+    [5, 3],
+    [4, 0],
+  ]];
+  socket.emit('draw paths', svgTools.scaledPaths(starpaths, '0 0 8 8'));
+}, false);
+
+const twoTurtlesButton = document.getElementById('draw-star-2-turtles');
+twoTurtlesButton.addEventListener('click', () => {
   const starpaths = [[
     [4, 0],
     [3, 3],
@@ -120,7 +138,7 @@ starbutton.addEventListener('click', () => {
     [5, 3],
     [4, 0],
   ]];
-  socket.emit('draw paths', svgTools.scaledPaths(starpaths, '0 0 16 16'));
+  socket.emit('draw paths', svgTools.scaledPaths(starpaths, '0 0 8 8'));
 }, false);
 
 /**
