@@ -1,0 +1,55 @@
+body {
+  color: $dark-gray;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 auto;
+  max-width: 540px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 100;
+}
+
+.map-container {
+  height: 540px;
+  margin: 20px 0;
+  max-width: 540px;
+}
+
+.draw-stars {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fileinput {
+  height: .1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: .1px;
+  z-index: -1;
+}
+
+.star-button,
+.fileinput + label {
+  background-color: $blue;
+  border: 0;
+  border-radius: 4px;
+  color: $white;
+  cursor: pointer;
+  display: block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 12px;
+  text-transform: uppercase;
+  width: 250px;
+
+  &:hover {
+    background-color: $dark-blue;
+  }
+}
