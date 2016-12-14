@@ -9,8 +9,8 @@
     "js": "./node_modules/.bin/gulp js",
     "sasslint": "./node_modules/.bin/gulp sasslint",
     "css": "./node_modules/.bin/gulp css",
-    "server": "./node_modules/.bin/gulp server",
-    "dev": "npm run js && npm run css && npm run server"
+    "start": "./node_modules/.bin/gulp server",
+    "dev": "npm run js && npm run css && npm run start"
   },
   "repository": {
     "type": "git",
