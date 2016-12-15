@@ -1,5 +1,5 @@
 body {
-  color: $dark-gray;
+  color: #333;
   font-family: 'Raleway', sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -35,10 +35,10 @@ h1 {
 
 .star-button,
 .fileinput + label {
-  background-color: $blue;
+  background-color: #006bb6;
   border: 0;
   border-radius: 4px;
-  color: $white;
+  color: #fff;
   cursor: pointer;
   display: block;
   font-family: 'Raleway', sans-serif;
@@ -48,8 +48,9 @@ h1 {
   padding: 12px;
   text-transform: uppercase;
   width: 250px;
+}
 
-  &:hover {
-    background-color: $dark-blue;
-  }
+.star-button:hover,
+.fileinput + label&:hover {
+  background-color: #004a80;
 }
