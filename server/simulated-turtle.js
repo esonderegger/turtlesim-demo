@@ -96,7 +96,7 @@ class SimulatedTurtle extends EventEmitter {
    * @param {number} integral - The integral value from the previous step.
    */
   goToTheta(goalTheta, callback, previousError, integral) {
-    let errorVal = this.thetaError(goalTheta, this.theta);
+    let errorVal = SimulatedTurtle.thetaError(goalTheta, this.theta);
     if (Math.abs(errorVal) < this.thetaTolerance) {
       this.setVelocity(0.0, 0.0);
       callback();
@@ -170,7 +170,7 @@ class SimulatedTurtle extends EventEmitter {
       this.setVelocity(0.0, 0.0);
       callback();
     } else {
-      let angVelocity = this.thetaError(
+      let angVelocity = SimulatedTurtle.thetaError(
         this.thetaForGoalPosition(goalX, goalY), this.theta
       );
       if (Math.abs(angVelocity) > Math.PI / 2) { // we've gone too far.
