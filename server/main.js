@@ -9,13 +9,12 @@ Meteor.startup(() => {
   let turtles = [];
   let killTurtle = null;
   let drawPaths = null;
-  let turtleCounter = 1;
+  let turtleCounter = 2;
   MongoTurtles.remove({});
   MongoPaths.remove({});
   const pathsQuery = MongoPaths.find({});
   pathsQuery.observeChanges({
     added: (id, fields) => {
-      console.log(fields.paths);
       drawPaths(fields.paths, () => {
       });
     },
@@ -82,10 +81,10 @@ Meteor.startup(() => {
         turtles.push(newTurtle);
       }
     };
-    killTurtle('turtle1');
+    killTurtle('turtle1', () => {});
     let originalTurtle = {
-      name: 'turtle1',
-      turtle: new SimulatedTurtle(rosNode, 5.5, 5.5, 0, 'turtle1'),
+      name: 'turtle2',
+      turtle: new SimulatedTurtle(rosNode, 5.5, 5.5, 0, 'turtle2'),
       exists: true,
     };
     let originalMongoTurtle = MongoTurtles.insert({
