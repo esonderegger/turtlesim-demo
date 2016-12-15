@@ -85,7 +85,7 @@ Template.map.rendered = () => {
     changed: (id, fields) => {
       const msg = fields.pose;
       if (!leafletTurtles[id]) {
-        initLeafletTurtle(id, fields.pose);
+        initLeafletTurtle(id, msg);
       }
       leafletTurtles[id].marker.setLatLng({lat: msg.y, lng: msg.x});
       const newAngle = (msg.theta * -180 / Math.PI) + 90;

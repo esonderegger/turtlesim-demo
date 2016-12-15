@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "description": "A simple little demo to show a simulated turtle drawing shapes.",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "meteor run"
   },
   "repository": {
@@ -23,13 +22,11 @@
   "homepage": "https://github.com/esonderegger/turtlesim-demo#readme",
   "dependencies": {
     "babel-runtime": "6.18.0",
-    "chai": "^3.5.0",
     "eslint": "^3.12.0",
     "eslint-config-google": "^0.7.1",
     "leaflet": "^1.0.2",
     "leaflet-rotatedmarker": "^0.1.2",
     "meteor-node-stubs": "~0.2.0",
-    "mocha": "^3.2.0",
     "path-data-polyfill": "^1.0.0",
     "rosnodejs": "git://github.com/chfritz/rosjs.git#with_dist"
   }
