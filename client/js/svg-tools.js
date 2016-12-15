@@ -1,4 +1,9 @@
-require('path-data-polyfill');
+try {
+  require('path-data-polyfill');
+} catch (e) {
+  console.log('we must be unit testing.');
+}
+
 
 /**
  * Returns a set of points with a transform applied.

@@ -141,7 +141,7 @@ class SimulatedTurtle extends EventEmitter {
    * @param {number} current - The current theta value.
    * @return {number}
    */
-  thetaError(desired, current) {
+  static thetaError(desired, current) {
     let errorAmount = desired - current;
     if (Math.abs(errorAmount) < Math.PI) {
       return errorAmount;
