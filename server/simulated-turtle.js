@@ -70,7 +70,7 @@ class SimulatedTurtle extends EventEmitter {
     this.yPosition = poseData.y;
     this.theta = poseData.theta;
     this.angularVelocity = poseData.angular_velocity;
-    this.linearVelocity = poseData.angular_velocity;
+    this.linearVelocity = poseData.linear_velocity;
     this.emit('pose', poseData);
   }
 

@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 const rosnodejs = require('rosnodejs');
 const SimulatedTurtle = require('./simulated-turtle.js');
 
@@ -17,14 +17,11 @@ Meteor.startup(() => {
     added: (id, fields) => {
       console.log(fields.paths);
       drawPaths(fields.paths, () => {
-        console.log('path complete');
       });
-    }
+    },
   });
   const updateMongoTurtle = Meteor.bindEnvironment((id, msg) => {
-    MongoTurtles.update(id, {
-      $set: {pose: msg}
-    });
+    MongoTurtles.update(id, {$set: {pose: msg}});
   });
   rosnodejs.initNode('/my_node', {onTheFly: true}).then((rosNode) => {
     killTurtle = (turtleName, callback) => {
@@ -70,8 +67,10 @@ Meteor.startup(() => {
           pose: {
             x: paths[b][0][0],
             y: paths[b][0][1],
-            theta: 0
-          }
+            theta: 0,
+            angular_velocity: 0,
+            linear_velocity: 0,
+          },
         });
         newTurtle.on('pose', (msg) => {
           if (newTurtleObj.exists) {
@@ -93,7 +92,9 @@ Meteor.startup(() => {
       name: originalTurtle.name,
       x: 5.5,
       y: 5.5,
-      theta: 0
+      theta: 0,
+      angular_velocity: 0,
+      linear_velocity: 0,
     });
     originalTurtle.turtle.on('pose', (msg) => {
       if (originalTurtle.exists) {
