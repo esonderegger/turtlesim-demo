@@ -22,7 +22,7 @@ Meteor.startup(() => {
   const updateMongoTurtle = Meteor.bindEnvironment((id, msg) => {
     MongoTurtles.update(id, {$set: {pose: msg}});
   });
-  rosnodejs.initNode('/my_node', {onTheFly: true}).then((rosNode) => {
+  rosnodejs.initNode('/meteor_node', {onTheFly: true}).then((rosNode) => {
     killTurtle = (turtleName, callback) => {
       const killMessage = rosnodejs.require('turtlesim').srv.Kill;
       const killRequest = new killMessage.Request({name: turtleName});
