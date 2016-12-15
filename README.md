@@ -3,10 +3,10 @@ A simple little demo to show a simulated turtle drawing shapes.
 
 ## How to build and run locally:
 
-This demo requires ROS "kinetic" and Node.js be installed on Ubuntu 16.04 computer. It may work on other versions of Node.js, but it has only been tested on v6.9.2.
+This demo requires ROS "kinetic" and Meteor be installed on Ubuntu 16.04 computer.
 
 - [ROS "Kinetic" installation instructions](http://wiki.ros.org/kinetic/Installation/Ubuntu)
-- [Node.js and NPM installation instructions](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
+- [Meteor installation instructions](https://www.meteor.com/install)
 
 In one tab of the terminal application, start ROS's core functionality:
 
@@ -21,8 +21,8 @@ Then, to build and run this demo:
 
     git clone https://github.com/esonderegger/turtlesim-demo.git
     cd turtlesim-demo
-    npm install
-    npm run dev
+    meteor npm install
+    meteor
 
 Finally, open up a web browser and go to [http://localhost:3000](http://localhost:3000) to see the simulated turtle in a Leaflet interactive map. Click the buttons to command the turtle to draw a star or upload one of the SVG files in this repository to have the turtle draw its path.
 

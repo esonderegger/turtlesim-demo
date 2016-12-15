@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const svgTools = require('../client/js/svg-tools.js');
+const svgTools = require('../client/svg-tools.js');
 
 describe('Path scaling', () => {
   it('scales a square box to 10x10', () => {

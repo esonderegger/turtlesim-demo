@@ -1,16 +1,11 @@
 {
   "name": "turtlesim-demo",
+  "private": true,
   "version": "0.1.0",
   "description": "A simple little demo to show a simulated turtle drawing shapes.",
-  "main": "gulpfile.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
-    "eslint": "./node_modules/.bin/gulp eslint",
-    "js": "./node_modules/.bin/gulp js",
-    "sasslint": "./node_modules/.bin/gulp sasslint",
-    "css": "./node_modules/.bin/gulp css",
-    "start": "./node_modules/.bin/gulp server",
-    "dev": "npm run js && npm run css && npm run start"
+    "start": "meteor run"
   },
   "repository": {
     "type": "git",
@@ -27,30 +22,15 @@
   },
   "homepage": "https://github.com/esonderegger/turtlesim-demo#readme",
   "dependencies": {
-    "express": "^4.14.0",
-    "rosnodejs": "git://github.com/RethinkRobotics-opensource/rosnodejs.git#kinetic-devel",
-    "socket.io": "^1.7.2"
-  },
-  "devDependencies": {
-    "babel-preset-es2015": "^6.18.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.1.1",
+    "babel-runtime": "6.18.0",
     "chai": "^3.5.0",
     "eslint": "^3.12.0",
     "eslint-config-google": "^0.7.1",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-express": "^0.3.5",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.0.0",
-    "gulp-sass-lint": "^1.3.2",
-    "gulp-sourcemaps": "^1.9.1",
     "leaflet": "^1.0.2",
     "leaflet-rotatedmarker": "^0.1.2",
+    "meteor-node-stubs": "~0.2.0",
     "mocha": "^3.2.0",
     "path-data-polyfill": "^1.0.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "rosnodejs": "git://github.com/chfritz/rosjs.git#with_dist"
   }
 }
